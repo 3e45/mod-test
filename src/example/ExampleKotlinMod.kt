@@ -15,6 +15,9 @@ class ExampleKotlinMod : Mod() {
                 val build = tile.build
                 if (build is LogicBlock.LogicBuild) {
                     Log.info("x: ${build.x()}, y: ${build.y()}, privileged: ${build.executor.privileged}, code: ${build.code}")
+                    for (link in build.links) {
+                        Log.info("- name: ${link.name}, x: ${link.x}, y: ${link.y}")
+                    }
                 }
             }
         }
