@@ -18,3 +18,5 @@ version: 1.0
 
 #the minimum game build required to run this mod
 minGameVersion: 136
+
+hidden: true
