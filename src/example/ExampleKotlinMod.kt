@@ -6,23 +6,15 @@ import mindustry.Vars
 import mindustry.game.EventType.*
 import mindustry.mod.*
 import mindustry.ui.dialogs.*
+import mindustry.world.blocks.logic.LogicBlock
 
 class ExampleKotlinMod : Mod() {
     init {
-        Log.info("Loaded ExampleKotlinMod constructor.")
-
-        //listen for game load event
-        Events.on(ClientLoadEvent::class.java) {
-            //show dialog upon startup
-            Time.runTask(10f) {
-                BaseDialog("frog").apply {
-                    cont.apply {
-                        add("behold").row()
-                        //mod sprites are prefixed with the mod name (this mod is called 'example-kotlin-mod' in its config)
-                        image(Core.atlas.find("example-kotlin-mod-frog")).pad(20f).row()
-                        button("I see") { hide() }.size(100f, 50f)
-                    }
-                    show()
+        Events.on(WorldLoadEvent::class.java) {
+            for (tile in Vars.world.tiles) {
+                val build = tile.build
+                if (build is LogicBlock.LogicBuild) {
+                    Log.info("x: ${build.x()}, y: ${build.y()}")
                 }
             }
         }
