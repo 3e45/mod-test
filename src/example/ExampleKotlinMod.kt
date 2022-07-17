@@ -24,7 +24,7 @@ class ExampleKotlinMod : Mod() {
 
             Log.info("Objectives:")
             for (objective in Vars.state.rules.objectives.all) {
-                Log.info("- ${objective.text()}, markers: ${objective.markers}, flagsAdded: ${objective.flagsAdded}, flagsAdded: ${objective.flagsRemoved}, details: ${objective.details}")
+                Log.info("- ${objective.text()}, flagsAdded: ${objective.flagsAdded.joinToString(";")}, flagsAdded: ${objective.flagsRemoved.joinToString(";")}, details: ${objective.details}")
             }
         }
     }
