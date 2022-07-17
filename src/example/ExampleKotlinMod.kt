@@ -11,14 +11,20 @@ import mindustry.world.blocks.logic.LogicBlock
 class ExampleKotlinMod : Mod() {
     init {
         Events.on(WorldLoadEvent::class.java) {
+            Log.info("World processors:")
             for (tile in Vars.world.tiles) {
                 val build = tile.build
                 if (build is LogicBlock.LogicBuild) {
                     Log.info("x: ${build.x()}, y: ${build.y()}, privileged: ${build.executor.privileged}, code: ${build.code}")
                     for (link in build.links) {
-                        Log.info("- name: ${link.name}, x: ${link.x}, y: ${link.y}")
+                        Log.info("- link name: ${link.name}, x: ${link.x}, y: ${link.y}")
                     }
                 }
+            }
+
+            Log.info("Objectives:")
+            for (objective in Vars.state.rules.objectives.all) {
+                Log.info("- ${objective.text()}, markers: ${objective.markers}, flagsAdded: ${objective.flagsAdded}, flagsAdded: ${objective.flagsRemoved}, details: ${objective.details}")
             }
         }
     }
