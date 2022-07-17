@@ -1,6 +1,9 @@
 name: Java CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   buildJar:
@@ -17,8 +20,8 @@ jobs:
         java-version: 16
     - name: Build mod jar
       run: ./gradlew deploy
-    - name: Upload built jar file
-      uses: actions/upload-artifact@v2
+    - name: Release
+      uses: softprops/action-gh-release@v1
       with:
-        name: ${{ github.event.repository.name }}
-        path: build/libs/${{ github.event.repository.name }}.jar
+        files: |
+          build/libs/${{ github.event.repository.name }}.jar
