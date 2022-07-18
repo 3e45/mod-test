@@ -11,6 +11,7 @@ import mindustry.mod.*
 import mindustry.ui.Styles
 import mindustry.ui.dialogs.*
 import mindustry.world.blocks.logic.LogicBlock
+import java.io.File
 
 class ExampleKotlinMod : Mod() {
     val table = Table()
@@ -21,7 +22,13 @@ class ExampleKotlinMod : Mod() {
             table.fillParent = true
             table.top().left().defaults().size(45.0f)
             table.button(Icon.editor, Styles.cleari, 45.0f) {
-                Log.info("clicked!!!")
+                val build = Vars.control.input.config.selected
+                if (build is LogicBlock.LogicBuild) {
+                    val f = File.createTempFile("tmp", ".txt")
+                    f.writeText(build.code, Charsets.UTF_8)
+                    // ProcessBuilder("/usr/bin/code", f.toString()).start()
+                    java.awt.Desktop.getDesktop().edit(f)
+                }
             }.name("openExternalEditor")
             Vars.ui.hudGroup.addChild(table)
             table.visibility = Boolp { Vars.control.input.config.selected is LogicBlock.LogicBuild }
