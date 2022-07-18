@@ -54,12 +54,12 @@ class ExampleKotlinMod : Mod() {
                     }, details: ${objective.details}"
                 )
             }
+        }
 
-            Events.run(Trigger.draw::class.java) {
-                // val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
-                // table.visible = x
-                Log.info("draw")
-            }
+        Events.run(Trigger.draw) {
+            // val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
+            // table.visible = x
+            Log.info("draw")
         }
     }
 
