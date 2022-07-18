@@ -32,10 +32,10 @@ class ExampleKotlinMod : Mod() {
 //                 visible
 //             }
         }
-        Events.on(Trigger.update::class.java) {
+        Events.run(Trigger.draw::class.java) {
             val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
             table.visible = x
-            Log.info(x)
+            Log.info("x: ${x}")
         }
         Events.on(WorldLoadEvent::class.java) {
             Log.info("World processors:")
