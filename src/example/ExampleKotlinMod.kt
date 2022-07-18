@@ -23,6 +23,7 @@ class ExampleKotlinMod : Mod() {
             table.button(Icon.redditAlien, Styles.cleari, 45.0f) {
                 Log.info("clicked!!!")
             }.name("openExternalEditor")
+            Vars.ui.hudGroup.addChild(table)
 //            table.visibility = Boolp {
 //                val selected = Vars.control.input.config.selected
 //                val visible = selected is LogicBlock.LogicBuild
