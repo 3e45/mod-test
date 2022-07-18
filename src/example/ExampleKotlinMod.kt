@@ -23,19 +23,19 @@ class ExampleKotlinMod : Mod() {
             table.button(Icon.editor, Styles.cleari, 45.0f) {
                 Log.info("clicked!!!")
             }.name("openExternalEditor")
-//             table.visibility = Boolp {
-//                 val selected = Vars.control.input.config.selected
-//                 val visible = selected is LogicBlock.LogicBuild
-//                 if (!table.visible && visible) {
-//                     Log.info("opened")
-//                 }
-//                 visible
-//             }
-        }
-        Events.run(Trigger.draw::class.java) {
-            val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
-            table.visible = x
-            Log.info("x: ${x}")
+            table.visibility = Boolp {
+                val selected = Vars.control.input.config.selected
+                val visible = selected is LogicBlock.LogicBuild
+                if (!table.visible && visible) {
+                    Log.info("opened")
+                }
+                visible
+            }
+            Events.run(Trigger.draw::class.java) {
+                // val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
+                // table.visible = x
+                Log.info("draw")
+            }
         }
         Events.on(WorldLoadEvent::class.java) {
             Log.info("World processors:")
@@ -51,7 +51,13 @@ class ExampleKotlinMod : Mod() {
 
             Log.info("Objectives:")
             for (objective in Vars.state.rules.objectives.all) {
-                Log.info("- ${objective.text()}, flagsAdded: ${objective.flagsAdded.joinToString(";")}, flagsAdded: ${objective.flagsRemoved.joinToString(";")}, details: ${objective.details}")
+                Log.info(
+                    "- ${objective.text()}, flagsAdded: ${objective.flagsAdded.joinToString(";")}, flagsAdded: ${
+                        objective.flagsRemoved.joinToString(
+                            ";"
+                        )
+                    }, details: ${objective.details}"
+                )
             }
         }
     }
