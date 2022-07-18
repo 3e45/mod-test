@@ -23,14 +23,17 @@ class ExampleKotlinMod : Mod() {
             table.button(Icon.editor, Styles.cleari, 45.0f) {
                 Log.info("clicked!!!")
             }.name("openExternalEditor")
-             table.visibility = Boolp {
-                 val selected = Vars.control.input.config.selected
-                 val visible = selected is LogicBlock.LogicBuild
-                 if (!table.visible && visible) {
-                     Log.info("opened")
-                 }
-                 visible
-             }
+//             table.visibility = Boolp {
+//                 val selected = Vars.control.input.config.selected
+//                 val visible = selected is LogicBlock.LogicBuild
+//                 if (!table.visible && visible) {
+//                     Log.info("opened")
+//                 }
+//                 visible
+//             }
+        }
+        Events.on(Trigger.draw::class.java) {
+            table.visible = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
         }
         Events.on(WorldLoadEvent::class.java) {
             Log.info("World processors:")
