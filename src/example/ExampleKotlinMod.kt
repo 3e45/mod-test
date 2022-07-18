@@ -20,13 +20,19 @@ class ExampleKotlinMod : Mod() {
         Events.run(ClientLoadEvent::class.java) {
             Log.info("ClientLoadEvent")
             table.fillParent = true
+            // TODO: set position
             table.top().left().defaults().size(45.0f)
-            table.button(Icon.editor, Styles.cleari, 45.0f) {
+            table.button(Icon.file, Styles.cleari, 45.0f) {
                 val build = Vars.control.input.config.selected
                 if (build is LogicBlock.LogicBuild) {
-                    val f = File.createTempFile("tmp", ".txt")
+                    val f = File.createTempFile("tmp", ".mlog")
                     f.writeText(build.code, Charsets.UTF_8)
-                     ProcessBuilder("/usr/bin/code", f.toString()).start()
+                    // TODO: locate the command
+                    ProcessBuilder("/usr/bin/code", "--wait", f.toString()).start().onExit().thenRun {
+                        if (f.exists()) {
+                            build.configure(LogicBlock.compress(f.readText(), build.relativeConnections()))
+                        }
+                    }
                 }
             }.name("openExternalEditor")
             Vars.ui.hudGroup.addChild(table)
@@ -55,11 +61,6 @@ class ExampleKotlinMod : Mod() {
                 )
             }
         }
-
-//        Events.run(Trigger.draw) {
-//            val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
-//            table.visible = x
-//        }
     }
 
     override fun loadContent() {
