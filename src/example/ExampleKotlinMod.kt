@@ -32,7 +32,7 @@ class ExampleKotlinMod : Mod() {
 //                 visible
 //             }
         }
-        Events.on(Trigger.draw::class.java) {
+        Events.on(Trigger.update::class.java) {
             val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
             table.visible = x
             Log.info(x)
