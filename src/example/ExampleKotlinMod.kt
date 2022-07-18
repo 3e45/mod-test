@@ -20,17 +20,17 @@ class ExampleKotlinMod : Mod() {
             Log.info("ClientLoadEvent")
             table.fillParent = true
             table.top().left().defaults().size(45.0f)
-            table.button(Icon.editor, Styles.cleari, 45.0f) {
+            table.button(Icon.redditAlien, Styles.cleari, 45.0f) {
                 Log.info("clicked!!!")
             }.name("openExternalEditor")
-            table.visibility = Boolp {
-                val selected = Vars.control.input.config.selected
-                val visible = selected is LogicBlock.LogicBuild
-                if (!table.visible && visible) {
-                    Log.info("opened")
-                }
-                visible
-            }
+//            table.visibility = Boolp {
+//                val selected = Vars.control.input.config.selected
+//                val visible = selected is LogicBlock.LogicBuild
+//                if (!table.visible && visible) {
+//                    Log.info("opened")
+//                }
+//                visible
+//            }
         }
         Events.run(WorldLoadEvent::class.java) {
             Log.info("World processors:")
@@ -59,7 +59,6 @@ class ExampleKotlinMod : Mod() {
         Events.run(Trigger.draw) {
             val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
             table.visible = x
-            Log.info("draw: ${x}")
         }
     }
 
