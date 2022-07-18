@@ -24,14 +24,7 @@ class ExampleKotlinMod : Mod() {
                 Log.info("clicked!!!")
             }.name("openExternalEditor")
             Vars.ui.hudGroup.addChild(table)
-//            table.visibility = Boolp {
-//                val selected = Vars.control.input.config.selected
-//                val visible = selected is LogicBlock.LogicBuild
-//                if (!table.visible && visible) {
-//                    Log.info("opened")
-//                }
-//                visible
-//            }
+            table.visibility = Boolp { Vars.control.input.config.selected is LogicBlock.LogicBuild }
         }
         Events.run(WorldLoadEvent::class.java) {
             Log.info("World processors:")
@@ -57,10 +50,10 @@ class ExampleKotlinMod : Mod() {
             }
         }
 
-        Events.run(Trigger.draw) {
-            val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
-            table.visible = x
-        }
+//        Events.run(Trigger.draw) {
+//            val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
+//            table.visible = x
+//        }
     }
 
     override fun loadContent() {
