@@ -16,7 +16,7 @@ class ExampleKotlinMod : Mod() {
     val table = Table()
 
     init {
-        Events.on(ClientLoadEvent::class.java) {
+        Events.run(ClientLoadEvent::class.java) {
             Log.info("ClientLoadEvent")
             table.fillParent = true
             table.top().left().defaults().size(45.0f)
@@ -31,13 +31,8 @@ class ExampleKotlinMod : Mod() {
                 }
                 visible
             }
-            Events.run(Trigger.draw::class.java) {
-                // val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
-                // table.visible = x
-                Log.info("draw")
-            }
         }
-        Events.on(WorldLoadEvent::class.java) {
+        Events.run(WorldLoadEvent::class.java) {
             Log.info("World processors:")
             for (tile in Vars.world.tiles) {
                 val build = tile.build
@@ -58,6 +53,12 @@ class ExampleKotlinMod : Mod() {
                         )
                     }, details: ${objective.details}"
                 )
+            }
+
+            Events.run(Trigger.draw::class.java) {
+                // val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
+                // table.visible = x
+                Log.info("draw")
             }
         }
     }
