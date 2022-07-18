@@ -33,7 +33,9 @@ class ExampleKotlinMod : Mod() {
 //             }
         }
         Events.on(Trigger.draw::class.java) {
-            table.visible = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
+            val x = Vars.control.input.config.isShown && Vars.control.input.config.selected is LogicBlock.LogicBuild
+            table.visible = x
+            Log.info(x)
         }
         Events.on(WorldLoadEvent::class.java) {
             Log.info("World processors:")
