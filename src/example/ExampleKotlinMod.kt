@@ -1,15 +1,32 @@
 package example
 
 import arc.*
+import arc.func.Boolp
+import arc.scene.ui.layout.Table
 import arc.util.*
 import mindustry.Vars
 import mindustry.game.EventType.*
+import mindustry.gen.Icon
 import mindustry.mod.*
+import mindustry.ui.Styles
 import mindustry.ui.dialogs.*
 import mindustry.world.blocks.logic.LogicBlock
 
 class ExampleKotlinMod : Mod() {
+    val table = Table()
+
     init {
+        Events.on(ClientLoadEvent::class.java) {
+            table.fillParent = true
+            table.visibility = Boolp {
+                val selected = Vars.control.input.config.selected
+                Vars.control.input.config.isShown && selected is LogicBlock.LogicBuild
+            }
+            table.top().left().defaults().size(45.0f)
+            table.button(Icon.editor, Styles.cleari, 45.0f) {
+                Log.info("clicked!!!")
+            }.name("openExternalEditor")
+        }
         Events.on(WorldLoadEvent::class.java) {
             Log.info("World processors:")
             for (tile in Vars.world.tiles) {
