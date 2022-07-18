@@ -20,7 +20,7 @@ class ExampleKotlinMod : Mod() {
             Log.info("ClientLoadEvent")
             table.fillParent = true
             table.top().left().defaults().size(45.0f)
-            table.button(Icon.redditAlien, Styles.cleari, 45.0f) {
+            table.button(Icon.editor, Styles.cleari, 45.0f) {
                 Log.info("clicked!!!")
             }.name("openExternalEditor")
             Vars.ui.hudGroup.addChild(table)
