@@ -26,8 +26,7 @@ class ExampleKotlinMod : Mod() {
                 if (build is LogicBlock.LogicBuild) {
                     val f = File.createTempFile("tmp", ".txt")
                     f.writeText(build.code, Charsets.UTF_8)
-                    // ProcessBuilder("/usr/bin/code", f.toString()).start()
-                    java.awt.Desktop.getDesktop().edit(f)
+                     ProcessBuilder("/usr/bin/code", f.toString()).start()
                 }
             }.name("openExternalEditor")
             Vars.ui.hudGroup.addChild(table)
